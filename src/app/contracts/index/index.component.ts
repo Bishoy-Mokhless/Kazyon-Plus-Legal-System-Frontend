@@ -3,12 +3,12 @@ import { ContractsApiService } from '../contracts-api.service';
 import  * as _ from 'lodash';
 import {MatSort, Sort} from '@angular/material/sort';
 import { ContractSummary } from '../contract-summary';
-import { MatSelect
- } from '@angular/material/select';
+import { MatLegacySelect as MatSelect
+ } from '@angular/material/legacy-select';
 import { Router } from '@angular/router';
 import { Contract } from '../contract';
 import { MatIcon } from '@angular/material/icon';
-import { MatTable } from '@angular/material/table';
+import { MatLegacyTable as MatTable } from '@angular/material/legacy-table';
 
 @Component({
   selector: 'app-index',
