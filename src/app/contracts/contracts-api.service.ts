@@ -17,7 +17,12 @@ export class ContractsApiService {
   api = 'http://localhost:8080/contract/'
 
   getAllContracts(filter_string?:String):Observable<Contract[]> {
-    return this._HttpClient.get<Contract[]>(this.api + "filter?" + filter_string);
+
+    return this._HttpClient.get<Contract[]>(this.api + "filter?" + filter_string, {
+      headers: {
+        'Authorization':'Basic U2FtOjEyMzQ=',
+      }
+    });
   }
 
   getContractById(id: Number):Observable<Contract> {
@@ -25,7 +30,11 @@ export class ContractsApiService {
   }
 
   getContractStatusCount():Observable<ContractSummary> {
-    return this._HttpClient.get(this.api + "status");
+    return this._HttpClient.get(this.api + "status",{
+      headers: {
+        'Authorization':'Basic U2FtOjEyMzQ=',
+      }
+    });
   }
 
   // downloadContractAttachment (store_code?:Number | undefined): any {

@@ -27,10 +27,10 @@ export class IndexComponent implements OnInit {
   ascending_sort : Boolean | null = null;
 
   filter_object  = {
-    branch!: "",
-    governorate!: "",
-    province!: "",
-    status!: ""
+    branch: "",
+    governorate: "",
+    province: "",
+    status: ""
   }
   // End of class vairables
 

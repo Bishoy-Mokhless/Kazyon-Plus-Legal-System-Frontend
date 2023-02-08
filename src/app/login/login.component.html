@@ -1,0 +1,50 @@
+<div style="background-color: #F8F9FB">
+  <div *ngIf="success == false">
+    <h1>User Name or password is Wrong</h1>
+  </div>
+  <div class="continer">
+    <div class="login-form-wrapper">
+      <form  class="card text-center p-5"
+            style="box-shadow: 0px 0px 6px 0px lightgray">
+
+        <img alt="kazyon-logo" class="login-image" src="assets/Images/Kazyon-logo-with-BG.png"/>
+
+        <p class="login-title h4 mb-4">Legal Managment Sytem</p>
+
+        <!-- Username -->
+        <input class="form-control mb-4" formControlName="username" id="defaultLoginForUsername" pInputText placeholder="Username"
+               type="text">
+        <div *ngIf="isSubmitted && formControls.username.errors" class="help-block">
+          <div *ngIf="formControls.username.errors.required">
+            <p class="error">UserName is required!</p>
+          </div>
+        </div>
+        <!-- Password -->
+        <input class="form-control mb-4" feedback formControlName="password" id="defaultLoginFormPassword" pPassword
+               placeholder="Password" type="password">
+        <div *ngIf="isSubmitted && formControls.password.errors" class="help-block">
+          <div *ngIf="formControls.password.errors.required">
+            <p class="error">Password is required!</p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-around">
+          <div>
+            <!-- Remember me -->
+            <div class="custom-control custom-checkbox">
+              <input class="custom-control-input" id="defaultLoginFormRemember" type="checkbox">
+              <label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
+            </div>
+          </div>
+        </div>
+        <!-- Sign in button -->
+        <button
+                class="btn btn-orange waves-effect waves-light btn-block my-4" style="height: 45px; font-size: 13px; box-shadow: 0px 0px 6px 1px lightgray"
+                type="submit">Sign in
+        </button>
+        <div *ngIf="errorStatus == 400">
+          <p #error class="error">Incorrect Credentials!</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
