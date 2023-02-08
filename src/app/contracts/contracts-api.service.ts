@@ -15,24 +15,36 @@ export class ContractsApiService {
   constructor(private _HttpClient:HttpClient) { }
 
   api = 'http://localhost:8080/contract/'
+  token = JSON.parse(localStorage.getItem('token')!);
+  temp = this.token['Token'];
+  tempToken = JSON.stringify(this.temp);
+  finalToken= this.tempToken.substring(2,this.tempToken.length-2)
+
 
   getAllContracts(filter_string?:String):Observable<Contract[]> {
 
     return this._HttpClient.get<Contract[]>(this.api + "filter?" + filter_string, {
       headers: {
-        'Authorization':'Basic U2FtOjEyMzQ=',
+        'Authorization':this.finalToken,
       }
     });
   }
 
   getContractById(id: Number):Observable<Contract> {
-    return this._HttpClient.get<Contract>(this.api + id);
+
+    return this._HttpClient.get<Contract>(this.api + id, {
+      headers: {
+        'Authorization':this.finalToken,
+      }
+    });
   }
 
   getContractStatusCount():Observable<ContractSummary> {
+
+
     return this._HttpClient.get(this.api + "status",{
       headers: {
-        'Authorization':'Basic U2FtOjEyMzQ=',
+        'Authorization':this.finalToken,
       }
     });
   }
@@ -49,7 +61,8 @@ export class ContractsApiService {
     })
     return this._HttpClient.post<Contract[]>(this.api + "attachment/upload?" + "id="+  <Number>  <unknown>id, fd, {
       headers: {
-        "mimeType" : "multipart/form-data"
+        "mimeType" : "multipart/form-data",
+        'Authorization':this.finalToken
       }
     });
   }
@@ -63,7 +76,8 @@ export class ContractsApiService {
     })
     return this._HttpClient.post<Contract[]>(this.api + "attachment/append?" + "id="+  <Number>  <unknown>id, fd, {
       headers: {
-        "mimeType" : "multipart/form-data"
+        "mimeType" : "multipart/form-data",
+        'Authorization':this.finalToken
       }
     });
   }
@@ -76,19 +90,28 @@ export class ContractsApiService {
         'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
         'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With',
         'Content-Type': 'application/json',
-        'Accept': '*/*'
+        'Accept': '*/*',
+        'Authorization':this.finalToken
       }
     });
 
   }
 
   listStoreCodes():Observable<number[]> {
-    return this._HttpClient.get<number[]>(this.api + "store-codes");
+    return this._HttpClient.get<number[]>(this.api + "store-codes",{
+      headers: {
+        'Authorization':this.finalToken,
+      }
+    });
   }
 
   updateContract(contract:Contract, id?:String) {
 
-    return this._HttpClient.post(this.api + id, contract);
+    return this._HttpClient.post(this.api + id, contract,{
+      headers: {
+        'Authorization':this.finalToken,
+      }
+    });
 
   }
 

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import { LoginService } from './login.service';
 //import {LoginService} from '../../core/services/login.service';
 
 @Component({
@@ -15,8 +16,8 @@ export class LoginComponent implements OnInit {
   authForm: FormGroup | undefined;
   isSubmitted = false;
 
-  constructor(private router: Router/* , private loginService: LoginService */,
-              private formBuilder: FormBuilder) {
+  constructor(private router: Router , private auth: LoginService ,
+              ) {
   }
 
   /* get formControls() {
@@ -29,7 +30,22 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     }); */
   }
+  loginUser(event:any){
+    event.preventDefault()
+    const target=event.target
+    const username=target.querySelector('#defaultLoginForUsername').value
+    const password=target.querySelector('#defaultLoginFormPassword').value
+    this.auth.login(username,password).subscribe(
+      data=>{
 
+        localStorage.setItem("token",JSON.stringify(data)
+        )
+        this.router.navigate(['contracts'])
+
+        console.log(data)
+    })
+
+  }
   /* loginUser(event) {
     this.errorStatus = 0;
     this.isSubmitted = true;
