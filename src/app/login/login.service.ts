@@ -18,4 +18,7 @@ export class LoginService  {
     //Basic U2FtOjEyMzQ=
 
   }
+  errorMessage(){
+    localStorage.setItem("error","Wrong Cerdintails");
+  }
 }

@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import { LoginService } from './login.service';
-//import {LoginService} from '../../core/services/login.service';
+import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -20,59 +21,27 @@ export class LoginComponent implements OnInit {
               ) {
   }
 
-  /* get formControls() {
-    return this.authForm.controls;
-  } */
 
   ngOnInit(): void {
-   /*  this.authForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
-    }); */
+
   }
   loginUser(event:any){
     event.preventDefault()
     const target=event.target
     const username=target.querySelector('#defaultLoginForUsername').value
     const password=target.querySelector('#defaultLoginFormPassword').value
+    localStorage.setItem("username",JSON.stringify(username))
     this.auth.login(username,password).subscribe(
       data=>{
 
         localStorage.setItem("token",JSON.stringify(data)
         )
-        this.router.navigate(['contracts'])
 
+        this.router.navigate(['contracts'])
         console.log(data)
     })
 
   }
-  /* loginUser(event) {
-    this.errorStatus = 0;
-    this.isSubmitted = true;
-    event.preventDefault();
-    const target = event.target;
-    const username = target.querySelector('#defaultLoginForUsername').value;
-    const password = target.querySelector('#defaultLoginFormPassword').value;
-    const user = {
-      userName: username,
-      password: password
-    };
 
-    this.loginService.login(user).subscribe((response: any) => {
-        if (response.body.user.initialPassword === true) {
-          this.loginService.setUsernameAndPasswordAndFirstName(username, password, response.body.user.firstName);
-          this.loginService.setIsSetPasswordFlag(true);
-          this.router.navigate(['set-password']);
-        } else {
-          this.loginService.setUsernameAndPasswordAndFirstName(username, password, response.body.user.firstName);
-          this.loginService.encryptAndSaveTokensFromHeaders(response.headers);
-          this.router.navigate(['']);
-        }
-      },
-      (error) => {
-        this.errorStatus = error.status;
-        //console.error(error.status);
-      });
-  } */
 
 }
