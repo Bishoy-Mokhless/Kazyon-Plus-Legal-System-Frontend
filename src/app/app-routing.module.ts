@@ -10,7 +10,8 @@ const routes: Routes = [
     canActivate:[AuthGuard]
   },
 
-  {path: '**',component:LoginComponent}
+  {path: '**',component:LoginComponent},
+  {path:'error', component:ErrorPageComponent}
 ]
 
 @NgModule({

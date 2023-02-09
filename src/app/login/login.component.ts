@@ -4,7 +4,11 @@ import {Router} from '@angular/router';
 import { LoginService } from './login.service';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { trigger, state, style, animate, transition } from '@angular/animations';
+import { DateAdapter } from '@angular/material/core';
+import {ActivatedRoute} from "@angular/router";
+import { DatePipe } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -34,12 +38,19 @@ export class LoginComponent implements OnInit {
     this.auth.login(username,password).subscribe(
       data=>{
 
-        localStorage.setItem("token",JSON.stringify(data)
-        )
+        localStorage.setItem("token",JSON.stringify(data))
 
         this.router.navigate(['contracts'])
         console.log(data)
-    })
+    },
+    (error) => {
+      this.errorStatus = error.status;
+      console.error(error.status);
+      this.router.navigate(['error'])
+      console.error(this.errorStatus);
+
+    }
+    );
 
   }
 

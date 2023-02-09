@@ -1,11 +1,13 @@
-import { Injectable, Injector } from '@angular/core';
+import { Injectable, Injector, NgModule } from '@angular/core';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class LoginService  {
   constructor(private _HttpClient:HttpClient) {
   }
