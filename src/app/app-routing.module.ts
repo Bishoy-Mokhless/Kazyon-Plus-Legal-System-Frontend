@@ -8,10 +8,10 @@ const routes: Routes = [
     path: 'contracts',
     loadChildren: () => import('./contracts/contracts.module').then(m => m.ContractsModule),
     canActivate:[AuthGuard]
-  },
+  }, {path:'error', component:ErrorPageComponent},
 
-  {path: '**',component:LoginComponent},
-  {path:'error', component:ErrorPageComponent}
+  {path: '**',component:LoginComponent}
+
 ]
 
 @NgModule({

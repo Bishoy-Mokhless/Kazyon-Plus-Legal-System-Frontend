@@ -14,7 +14,7 @@ export class ContractsApiService {
 
   constructor(private _HttpClient:HttpClient) { }
 
-  api = 'http://localhost:8080/contract/'
+  api = 'https://10.0.5.43:9090/contract/'
   token = JSON.parse(localStorage.getItem('token')!);
   temp = this.token['Token'];
   tempToken = JSON.stringify(this.temp);
