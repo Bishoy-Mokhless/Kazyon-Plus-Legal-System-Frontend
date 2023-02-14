@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem("token",JSON.stringify(data))
         //this.router.navigate(['error']);
         this.router.navigate(['contracts'])
-        console.log(data)
+        //console.log(data)
     },
     (error) => {
       this.errorStatus = error.status;

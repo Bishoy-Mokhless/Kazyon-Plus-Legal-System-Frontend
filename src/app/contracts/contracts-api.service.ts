@@ -14,7 +14,7 @@ export class ContractsApiService {
 
   constructor(private _HttpClient:HttpClient) { }
 
-  api = 'https://10.0.5.43:9090/contract/'
+  api = 'https://legalbackend-production.up.railway.app/contract/'
   token = JSON.parse(localStorage.getItem('token')!);
   temp = this.token['Token'];
   tempToken = JSON.stringify(this.temp);

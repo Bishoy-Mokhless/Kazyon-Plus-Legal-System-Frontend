@@ -12,9 +12,9 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     const username = JSON.parse(localStorage.getItem('username')!);
-    console.log(username);
+    //console.log(username);
     const tempUsername = JSON.stringify(username);
-    console.log(tempUsername);
+    //console.log(tempUsername);
     const finalUsername= tempUsername.substring(1,tempUsername.length-1)
 
     document.getElementById("user")!.innerHTML =finalUsername+ " مرحبا";
