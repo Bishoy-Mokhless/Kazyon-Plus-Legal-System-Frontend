@@ -1,0 +1,62 @@
+<ul class="breadcrumb">
+    <i class="fa fa-home" ></i>
+    <li><a class="grey" href="#">الرئيسيه</a></li>
+    <li><a class="black" href="#" >التوكيلات والقضايا</a></li>
+  </ul>
+
+  <style>
+    .fa {
+    margin-top: 5px;
+    margin-right: -10px;
+    color: gray;
+    }
+
+    a.grey {
+    color: grey;
+    margin-right: 5px;
+    }
+
+    a.black {
+    color: black;
+    }
+
+    ul.breadcrumb {
+      padding: 20px 56px;
+      list-style: none;
+      background-color: white;
+      direction: rtl;
+    }
+    ul.breadcrumb li {
+      display: inline;
+      font-size: 18px;
+    }
+    ul.breadcrumb li+li:before {
+      padding: 8px;
+      content: "/\00a0";
+    }
+
+    ul.breadcrumb li a {
+      text-decoration: none;
+    }
+
+    </style>
+
+
+
+<!-- <div class="container-fluid breadcramps mt-4 breadcramps" >
+    <br>
+
+    <h2> /التوكيلات و القضايا</h2>
+
+</div>
+<div class="container-fluid sign mt-4 sign"  dir="rtl">
+
+    <i class="fa fa-home"></i><h2>الرئيسية/ </h2>
+</div> -->
+
+<div class="container-fluid content mt-4 content" dir="rtl">
+    <div class="controls text-center">
+       <a [routerLink]="['/case' ]"><button>القضايا</button></a>
+       <a [routerLink]="['/procuration' ]"> <button>  التوكيلات</button></a>
+    </div>
+</div>

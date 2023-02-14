@@ -1,0 +1,192 @@
+<ul class="breadcrumb">
+  <i class="fa fa-home" ></i>
+  <li><a class="grey" href="#">الرئيسيه</a></li>
+  <li><a class="grey" href="#" >التوكيلات والقضايا</a></li>
+  <li><a class="grey"  [routerLink]="['/case']" >القضايا </a></li>
+  <li><a class="black"  >#{{case.idCase}}  </a></li>
+
+</ul>
+
+<style>
+  .fa {
+    margin-top: 5px;
+    margin-right: -10px;
+    color: gray;
+  }
+
+  a.grey {
+    color: grey;
+    margin-right: 5px;
+  }
+
+  a.black {
+    color: black;
+  }
+
+  ul.breadcrumb {
+    padding: 20px 56px;
+    list-style: none;
+    background-color: white;
+    direction: rtl;
+  }
+  ul.breadcrumb li {
+    display: inline;
+    font-size: 18px;
+  }
+  ul.breadcrumb li+li:before {
+    padding: 8px;
+    content: "/\00a0";
+  }
+
+  ul.breadcrumb li a {
+    text-decoration: none;
+  }
+
+</style>
+<div class="in text-center">
+  <button class="btn m-1 px-4 tablebtn toggle" (click)="toggle()" [disabled]='!caseFlag'>الجلسات</button>
+  <button class="btn m-1 px-4 tablebtn toggle" (click)="toggle()" [disabled]='caseFlag'>القضية</button>
+
+</div>
+<div *ngIf="caseFlag" class="container-fluid box mt-1 box" dir="rtl">
+  <div class="in text-center">
+    <br>
+    <form [formGroup]="exform" class="form">
+      <div class="grid2">
+        <div class="grid_item">
+          <label class="label">اسم الموكل
+            <span class="required-asterisk">*</span>
+          </label>
+          <input [(ngModel)]="case.client" formControlName="client"  type="text" class="form-control" (keypress)="isNumberKey($event)" maxlength="150">
+
+        </div>
+        <div  class="grid_item">
+          <label class="label"> اسم الخصم
+            <span class="required-asterisk">*</span>
+          </label>
+          <input [(ngModel)]="case.against" formControlName="against" type="text" class="form-control" (keypress)="isNumberKey($event)" maxlength="150">
+        </div>
+        <div class="grid_item">
+          <label class="label"> نوع القضية
+            <span class="required-asterisk">*</span>
+          </label>
+
+          <select [(ngModel)]="case.category" formControlName="category" name="type" ng-model="userSelect"> نوع القضية
+            <option value="مدني جزئي">  مدني جزئي </option>
+            <option value="مدني كلي">مدني كلي</option>
+            <option value="جنح">جنح</option>
+            <option value="جنح مستئنفة">جنح مستئنفة</option>
+            <option value="استئناف عالى">استئناف عالى</option>
+            <option value="جنايات"> جنايات</option>
+            <option value=" عمالى"> عمالى</option>
+            <option value="قضاء اداري"> قضاء اداري</option>
+
+          </select>
+
+
+        </div>
+        <div class="grid_item">
+          <label class="label"> رقم القضية
+            <span class="required-asterisk">*</span>
+          </label>
+          <input [(ngModel)]="case.numbercase" formControlName="numbercase" type="number" class="form-control"  min="1"  (keypress)="!isNumberKey($event)"    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                 type = "number"
+                 maxlength = "6">
+        </div>
+        <div class="grid_item">
+          <label class="label">السنة
+            <span class="required-asterisk">*</span>
+          </label>
+          <input [(ngModel)]="case.caseyear" [ngModel] ="case.caseyear  | date:'yyyy-MM-dd'" formControlName="caseyear" type='text' class="form-controll"  onfocus="(this.type='date')" (keydown)="false">
+          </div>
+        <div class="grid_item">
+          <label class="label"> رقم الملف</label>
+          <input [(ngModel)]="case.filenumber" formControlName="filenumber" class="form-control"  type="number"  min="1"  (keypress)="!isNumberKey($event)"    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                 type = "number"
+                 maxlength = "6">
+        </div>
+        <div class="grid_item">
+          <label class="label">الدائرة </label>
+          <input [(ngModel)]="case.area" formControlName="area"  type="text" (keypress)="isNumberKey($event)" maxlength="150">
+        </div>
+        <div class="grid_item">
+          <label class="label">صفة الموكل</label>
+          <input [(ngModel)]="case.clientstat" formControlName="clientstat" type="text" (keypress)="isNumberKey($event)" maxlength="150">
+        </div>
+        <div class="grid_item">
+          <label class="label">صفة الخصم </label>
+          <input [(ngModel)]="case.againststat" formControlName="againststat" type="text" (keypress)="isNumberKey($event)" maxlength="150">
+
+        </div>
+      </div>
+    </form>
+    <br>
+    <!--    <label class="error" [hidden]="!exform.invalid">يرجي ادخال البيانات كاملة</label>-->
+    <br>
+    <br>
+  </div>
+  <div class="in text-center">
+    <p class="pdf-title">الملحقات</p>
+    <div class="container-fluid box mt-4 box" dir="rtl">
+      <br>
+      <label for="file-upload" class="custom-file-upload">
+
+        <i class="fas fa-file-pdf"></i>
+
+      </label>
+      <input id="file-upload" type="file"  accept="application/pdf" (change)="onChange($event)" multiple>
+
+      <button [hidden]="!this.case.hasAttachment" class="btn m-5 px-4 savebtn"> <a [href]="downloadUrl"> تحميل الملفات</a></button>
+      <div class="grid">
+        <div *ngFor="let document of documentList; let i = index">
+
+          <div class="pdf-file-div">
+            <i class="fa-solid fa-file-pdf " id="pdf">
+              <i class="fa-solid fa-x" id="pdf-x" (click)="remove(i)">
+
+              </i>
+            </i>
+            <p>{{document.name}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+  </div>
+
+</div>
+
+<div *ngIf="!caseFlag" class="container-fluid box mt-1 box" dir="rtl">
+  <div class="in text-center">
+    <br>
+    <div class="scroll">
+      <table mat-table [dataSource]="sessions" #table  class="mat-elevation-z8  text-center" dir="rtl">
+
+        <ng-container matColumnDef="تاريخ الجلسة الحاليه ">
+          <th mat-header-cell *matHeaderCellDef class="text-center">تاريخ الجلسة الحاليه </th>
+          <td mat-cell *matCellDef="let element">{{element.startingDate | date:"yyyy//MM/dd"}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="قرار الجلسة الحاليه ">
+          <th mat-header-cell *matHeaderCellDef class="text-center">قرار الجلسة الحاليه </th>
+          <td mat-cell *matCellDef="let element"> {{element.decisionStatus}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="تاريخ الجلسة القادمه" >
+          <th mat-header-cell *matHeaderCellDef class="text-center">تاريخ الجلسة القادمه</th>
+          <td mat-cell *matCellDef="let element"> {{element.endingDate | date:"yyyy//MM/dd"}} </td>
+        </ng-container>
+
+        <tr mat-header-row  *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns; let index = index;"[ngClass]="{alternate: index % 2 == 0 }" ></tr>
+
+      </table>
+    </div>
+    <button (click)="addRow(table)" class="btn m-5 px-4 sessionbtn " [routerLink]="['/session', case.idCase]">اضافة جلسة</button>
+
+  </div>
+</div>
+<br>
+
+<button (click)="onSave()" class="btn m-5 px-4 savebtn" [disabled]="exform.invalid" [hidden]="!caseFlag">حفظ</button>
+<button class="btn m-5 px-4 ignorebtn"  [routerLink]="['/case']" [hidden]="!caseFlag">  تجاهل</button>
