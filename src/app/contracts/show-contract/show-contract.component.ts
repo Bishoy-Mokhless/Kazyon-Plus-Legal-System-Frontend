@@ -23,12 +23,12 @@ import { ToastrService } from 'ngx-toastr';
       })),
       state('initial', style({
         height:'0',
-        overflow:'hidden',
+        overflow:'visible',
         opacity:'0',
         padding: '0',
       })),
       state('final', style({
-        overflow:'hidden',
+        overflow:'visible',
         opacity:'1'
       })),
       transition('initial=>final', animate('300ms')),
@@ -46,7 +46,7 @@ export class ShowContractComponent implements OnInit {
 
   constants = ContractConstants;
 
-  download_url = "";
+  download_url = "https://legalbackend-production.up.railway.app/attachment/download/1";
   store_codes?: any[];
   errorStoreCodeFlag = false;
   previous_store_code?: Number;
@@ -157,7 +157,8 @@ export class ShowContractComponent implements OnInit {
     this._contractService.getContractById(id).subscribe((data)=> {
       this.currentContract = data
       this.has_previous_attachments = this.currentContract.has_attachment;
-        this.download_url = `http://adminkazyonplus.uksouth.cloudapp.azure.com/api/contract/attachment/download/${this.routerParams.snapshot.params?.['id']}`
+        //this.download_url = `http://adminkazyonplus.uksouth.cloudapp.azure.com/api/contract/attachment/download/${this.routerParams.snapshot.params?.['id']}`
+        this.download_url=`https://legalbackend-production.up.railway.app/attachment/download/${this.routerParams.snapshot.params?.['id']}`
 
       if (data.status == "ساري") {
         this.className = "activeContract";

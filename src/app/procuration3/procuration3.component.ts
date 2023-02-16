@@ -24,13 +24,14 @@ export class Procuration3Component implements OnInit {
   documentList: any[] = [];
   hasAttachament?:boolean;
 
-  downloadUrl = `http://adminkazyonplus.uksouth.cloudapp.azure.com/api/attachment/download/${this.id}?type=procurations`
+  //downloadUrl = `http://adminkazyonplus.uksouth.cloudapp.azure.com/api/attachment/download/${this.id}?type=procurations`
+  downloadUrl = `https://legalbackend-production.up.railway.app/attachment/download/${this.id}?type=procurations`
 
   constructor(private service: ProcurartonService, private _router: ActivatedRoute, private _navigate: Router) { }
 
   ngOnInit() {
     this.getProcurartionbyID();
-    
+
     this.exform = new FormGroup({
       'client_name' : new FormControl(null, Validators.required),
       'year': new FormControl(null, [Validators.required]),
@@ -43,7 +44,7 @@ export class Procuration3Component implements OnInit {
      this.files = event.target.files;
      this.documentList = event.target.files;
     }
-    
+
    remove(index:number){
     this.files2=[];
     for (let i = 0; i < this.files.length; i++) {
@@ -88,7 +89,7 @@ export class Procuration3Component implements OnInit {
         }
       }
 
-      
+
     }
 
 

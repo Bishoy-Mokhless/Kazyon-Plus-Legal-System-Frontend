@@ -1,7 +1,7 @@
 <ul class="breadcrumb">
     <i class="fa fa-home" ></i>
-    <li><a class="grey" href="#">الرئيسيه</a></li>
-    <li><a class="black" href="#" >التوكيلات والقضايا</a></li>
+    <li><a class="grey" [routerLink]="['/lawsuit' ]">الرئيسيه</a></li>
+    <!--<li><a class="black" href="/lawsuit" >التوكيلات والقضايا</a></li>-->
   </ul>
 
   <style>
@@ -58,5 +58,6 @@
     <div class="controls text-center">
        <a [routerLink]="['/case' ]"><button>القضايا</button></a>
        <a [routerLink]="['/procuration' ]"> <button>  التوكيلات</button></a>
+       <a [routerLink]="['/contracts' ]"> <button>  العقود</button></a>
     </div>
 </div>

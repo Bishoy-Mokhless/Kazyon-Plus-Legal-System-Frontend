@@ -11,25 +11,24 @@
     <div id="contractInfo" [@smoothCollapse]="isCollapsed.contractInfo?'initial':'final'">
 
       <div>
-        <mat-form-field style="width: 100%;" appearance="outline">
-          <mat-label>كود التشغيل</mat-label>
-          <input (keyup)="checkCode()" [disabled]="!editState" [(ngModel)]="currentContract.store_code"  required="true" dir="rtl" type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" #input  maxlength="6" matInput>
+        <mat-label class="label">كود التشغيل</mat-label>
+        <mat-form-field style="width: 100%; " appearance="outline" >
+          <input style="padding:5PX; "  (keyup)="checkCode()" [disabled]="!editState" [(ngModel)]="currentContract.store_code"  required="true" dir="rtl" type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" #input  maxlength="6" matInput>
         </mat-form-field>
         <div *ngIf="errorStoreCodeFlag">
           <p class="text-danger">* هذا الكود يوجد بالفعل، يرجى المراجعة</p>
         </div>
       </div>
-
+      <mat-label class="label">الساب</mat-label>
         <mat-form-field id="SAP" appearance="outline">
-          <mat-label>الساب</mat-label>
-          <input dir="rtl" [disabled]="!editState" [(ngModel)]="currentContract.sap_code"  type="text" #SAP  maxlength="8" matInput>
+
+          <input style="padding:5PX; " dir="rtl" [disabled]="!editState" [(ngModel)]="currentContract.sap_code"  type="text" #SAP  maxlength="8" matInput>
         </mat-form-field>
 
         <div>
         <h4 style="float: right;" class="ms-4 mt-2" dir="rtl">حالة العقد</h4>
-
         <mat-select id="status" [disabled]="!editState" [(ngModel)]="currentContract.status"   [ngClass]="className" (selectionChange)="setClass($event.value)" dir="rtl" placeholder="الحالة" style="width: 150px; height: 35px; padding: 5px;" disableOptionCentering panelClass="myPanelClass">
-          <mat-option *ngFor="let state of constants.states"   [value]="state.name">
+          <mat-option style="background-color: rgb(255, 255, 255);" *ngFor="let state of constants.states"   [value]="state.name">
               {{ state.name }}
           </mat-option>
         </mat-select>
@@ -44,37 +43,37 @@
     </legend>
     <span (click)="colapse('branchInfo')" class="legend2"><i  [@smoothCollapse]="isCollapsed.branchInfo? 'initialArrow':'invertedArrow'" class="fa-solid fa-caret-down ms-1" style="opacity: 0.5; padding-bottom: 5px;"></i></span>
     <div id="branchInfo" [@smoothCollapse]="isCollapsed.branchInfo?'initial':'final'">
-
+        <mat-label class="label">الاسم</mat-label>
         <mat-form-field appearance="outline">
-          <mat-label>الاسم</mat-label>
-          <input [disabled]="!editState" [(ngModel)]="currentContract.branch_name"  dir="rtl" #branch  maxlength="150" matInput>
-        </mat-form-field>
 
+          <input style="padding:5PX; " [disabled]="!editState" [(ngModel)]="currentContract.branch_name"  dir="rtl" #branch  maxlength="150" matInput>
+        </mat-form-field>
+        <mat-label class="label">العنوان</mat-label>
         <mat-form-field id="address" appearance="outline">
-          <mat-label>العنوان</mat-label>
-          <input [disabled]="!editState" dir="rtl" type="text" [(ngModel)]="currentContract.branch_address"  #address  maxlength="150" matInput required="true">
+
+          <input style="padding:5PX; " [disabled]="!editState" dir="rtl" type="text" [(ngModel)]="currentContract.branch_address"  #address  maxlength="150" matInput required="true">
 
         </mat-form-field>
 
 
 
-
+        <mat-label class="label">المحافظة</mat-label>
         <mat-form-field style="width: fit-content;" appearance="outline">
-          <mat-label>المحافظة</mat-label>
-          <mat-select [disabled]="!editState" dir="rtl" [(ngModel)]="currentContract.governorate" class="ms-auto" placeholder="المحافظة" required="true" disableOptionCentering panelClass="myPanelClass">
-              <mat-option style="margin-left: 15px" *ngFor="let gov of constants.governorates"  [value]="gov">
+
+          <mat-select style="padding:5PX; " [disabled]="!editState" dir="rtl" [(ngModel)]="currentContract.governorate" class="ms-auto" placeholder="المحافظة" required="true" disableOptionCentering panelClass="myPanelClass">
+              <mat-option style="margin-left: 15px; background-color: rgb(255, 255, 255);" *ngFor="let gov of constants.governorates"  [value]="gov">
                   {{ gov }}
               </mat-option>
           </mat-select>
         </mat-form-field>
 
+        <mat-label class="label">الإقليم</mat-label>
 
       <mat-form-field style="width: fit-content;"  appearance="outline">
 
-        <mat-label>الإقليم</mat-label>
 
-        <mat-select [disabled]="!editState" dir="rtl" [(ngModel)]="currentContract.province" placeholder="الإقليم" required="true" disableOptionCentering panelClass="myPanelClass">
-            <mat-option *ngFor="let area of constants.areas" [value]="area">
+        <mat-select style="padding:5PX; "  [disabled]="!editState" dir="rtl" [(ngModel)]="currentContract.province" placeholder="الإقليم" required="true" disableOptionCentering panelClass="myPanelClass">
+            <mat-option style="margin-left: 15px; background-color: rgb(255, 255, 255);" *ngFor="let area of constants.areas" [value]="area">
                 {{ area }}
             </mat-option>
 
@@ -90,42 +89,41 @@
     </legend>
     <span (click)="colapse('dates')" class="legend2"><i  [@smoothCollapse]="isCollapsed.dates? 'initialArrow':'invertedArrow'" class="fa-solid fa-caret-down ms-1" style="opacity: 0.5; padding-bottom: 5px;"></i></span>
 
-    <div id="containerDiv" [@smoothCollapse]="isCollapsed.dates?'initial':'final'" >
-
+    <div id="containerDiv" [@smoothCollapse]="isCollapsed.dates?'initial':'final'" style="overflow: visible;">
+        <mat-label class="label" >السريان</mat-label>
         <mat-form-field appearance="outline">
-        <mat-label>السريان</mat-label>
           <input dir="rtl" [(ngModel)]="currentContract.valid_through" [disabled]="!editState" matInput [matDatepicker]="active"  required readonly (focus)="active.open()"placeholder="السريان" required="true">
           <mat-datepicker-toggle matSuffix [for]="active"></mat-datepicker-toggle>
           <mat-datepicker #active></mat-datepicker>
           <mat-hint align="end">يوم/شهر/سنة</mat-hint>
         </mat-form-field>
-
+        <mat-label class="label">الانتهاء</mat-label>
         <mat-form-field appearance="outline">
-          <mat-label>الانتهاء</mat-label>
+
           <input dir="rtl" [(ngModel)]="currentContract.end_date"  [disabled]="!editState"  matInput [matDatepicker]="end" readonly (focus)="end.open()" placeholder="الانتهاء">
           <mat-datepicker-toggle matSuffix [for]="end"></mat-datepicker-toggle>
           <mat-datepicker #end></mat-datepicker>
           <mat-hint align="end">يوم/شهر/سنة</mat-hint>
         </mat-form-field>
-
+        <mat-label class="label">الاستلام</mat-label>
         <mat-form-field appearance="outline">
-          <mat-label>الاستلام</mat-label>
+
           <input dir="rtl" [(ngModel)]="currentContract.receiving_date"   matInput [matDatepicker]="received"  [disabled]="!editState"  readonly (focus)="received.open()" placeholder="الاستلام">
           <mat-datepicker-toggle matSuffix [for]="received"></mat-datepicker-toggle>
           <mat-datepicker #received></mat-datepicker>
           <mat-hint align="end">يوم/شهر/سنة</mat-hint>
         </mat-form-field>
-
+        <mat-label class="label">الافتتاح</mat-label>
         <mat-form-field appearance="outline">
-          <mat-label>الافتتاح</mat-label>
+
           <input dir="rtl" [(ngModel)]="currentContract.opening_date"   matInput [matDatepicker]="beginning" [disabled]="!editState"  readonly (focus)="beginning.open()" placeholder="الافتتاح">
           <mat-datepicker-toggle matSuffix [for]="beginning"></mat-datepicker-toggle>
           <mat-datepicker #beginning  ></mat-datepicker>
           <mat-hint align="end">يوم/شهر/سنة</mat-hint>
         </mat-form-field>
-
+        <mat-label class="label" style="overflow:visible;">التجديد</mat-label >
         <mat-form-field appearance="outline">
-          <mat-label>التجديد</mat-label>
+
           <input dir="rtl" [(ngModel)]="currentContract.renewal_date"   matInput readonly [matDatepicker]="renewal" [disabled]="!editState"  (focus)="renewal.open()" placeholder="التجديد">
           <mat-datepicker-toggle matSuffix [for]="renewal"></mat-datepicker-toggle>
           <mat-datepicker #renewal></mat-datepicker>

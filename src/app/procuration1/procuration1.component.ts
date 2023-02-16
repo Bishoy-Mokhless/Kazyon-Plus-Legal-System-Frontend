@@ -20,8 +20,8 @@ export class Procuration1Component implements OnInit {
   documentList: any[] = [];
   hasAttachament?:boolean;
 
-  downloadUrl = `http://adminkazyonplus.uksouth.cloudapp.azure.com/api/attachment/download/${1}?type=procurations`
-
+  //downloadUrl = `http://adminkazyonplus.uksouth.cloudapp.azure.com/api/attachment/download/${1}?type=procurations`
+  downloadUrl = `https://legalbackend-production.up.railway.app/attachment/download/${1}?type=procurations`;
   constructor(private service: ProcurartonService, private _navigate: Router) { }
 
   ngOnInit(): void {
@@ -35,7 +35,7 @@ export class Procuration1Component implements OnInit {
     }
 
   addProcurartion() {
-    
+
     this.service.addProcurartion(this.procuration)
     .subscribe(
       suc => {
@@ -72,7 +72,7 @@ export class Procuration1Component implements OnInit {
     this.files = event.target.files;
     this.documentList = event.target.files;
    }
-   
+
   remove(index:number){
    this.files2=[];
    for (let i = 0; i < this.files.length; i++) {

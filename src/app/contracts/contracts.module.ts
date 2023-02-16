@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ContractsRoutingModule } from './contracts-routing.module';
@@ -26,8 +27,7 @@ import  * as _ from 'lodash';
     AddContractComponent,
     ShowContractComponent,
     UploadComponent,
-    IndexComponent
-  ],
+    IndexComponent,  ],
   imports: [
     CommonModule,
     ContractsRoutingModule,

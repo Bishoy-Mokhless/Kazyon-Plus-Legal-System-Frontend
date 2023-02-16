@@ -1,8 +1,8 @@
 
 <ul class="breadcrumb">
   <i class="fa fa-home" ></i>
-  <li><a class="grey" href="#">الرئيسيه</a></li>
-  <li><a class="grey" href="#" >التوكيلات والقضايا</a></li>
+  <li><a class="grey"[routerLink]="['/lawsuit']" >الرئيسيه</a></li>
+  <!--<li><a class="grey" href="#" >التوكيلات والقضايا</a></li>-->
   <li><a class="grey" [routerLink]="['/case']" >القضايا </a></li>
   <li><a class="black">
 
@@ -130,19 +130,19 @@
               <div class="container-fluid box mt-4 box" dir="rtl">
                 <br>
                 <label for="file-upload" class="custom-file-upload">
-          
+
                   <i class="fas fa-file-pdf"></i>
-          
+
                 </label>
                 <input id="file-upload" type="file"  accept="application/pdf" (change)="onChange($event)" multiple>
-          
+
                <div class="grid">
                   <div *ngFor="let document of documentList; let i = index">
-          
+
                     <div class="pdf-file-div">
                       <i class="fa-solid fa-file-pdf " id="pdf">
                         <i class="fa-solid fa-x" id="pdf-x" (click)="remove(i)">
-          
+
                         </i>
                       </i>
                       <p>{{document.name}}</p>
@@ -156,5 +156,5 @@
 <button class="btn m-5 px-4 savebtn"  (click)="onSave()" [disabled]="exform.invalid" type="button">حفظ</button>
 
           </div>
-          
+
               </div>

@@ -15,6 +15,7 @@ export class ContractsApiService {
   constructor(private _HttpClient:HttpClient) { }
 
   api = 'https://legalbackend-production.up.railway.app/contract/'
+  //api = 'http://localhost:8080/contract/'
   token = JSON.parse(localStorage.getItem('token')!);
   temp = this.token['Token'];
   tempToken = JSON.stringify(this.temp);
@@ -49,9 +50,15 @@ export class ContractsApiService {
     });
   }
 
-  // downloadContractAttachment (store_code?:Number | undefined): any {
-  //   return this._HttpClient.get(this.api + `attachment/download/${store_code}.zip`, {responseType: 'blob'});
-  // }
+   downloadContractAttachment (store_code?:Number | undefined): any {
+     return this._HttpClient.get("https://legalbackend-production.up.railway.app/" + `attachment/download/${store_code}.zip`, {
+      headers: {
+        'Authorization':this.finalToken,
+      },
+      responseType: 'blob'
+    },
+    );
+  }
 
   addContractAttachments(files: any[], id?: string | null) {
     var fd = new FormData();
@@ -59,7 +66,7 @@ export class ContractsApiService {
     files.forEach(file => {
       fd.append("files", file, file.name);
     })
-    return this._HttpClient.post<Contract[]>(this.api + "attachment/upload?" + "id="+  <Number>  <unknown>id, fd, {
+    return this._HttpClient.post<Contract[]>("https://legalbackend-production.up.railway.app/" + "attachment/upload?" + "id="+  <Number>  <unknown>id, fd, {
       headers: {
         "mimeType" : "multipart/form-data",
         'Authorization':this.finalToken
