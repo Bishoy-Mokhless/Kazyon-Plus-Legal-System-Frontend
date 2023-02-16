@@ -1,7 +1,7 @@
 
 <ul class="breadcrumb">
   <i class="fa fa-home" ></i>
-  <li><a class="grey"[routerLink]="['/lawsuit']" >الرئيسيه</a></li>
+  <li><a class="grey"[routerLink]="['/legal']" >الرئيسيه</a></li>
   <!--<li><a class="grey" href="#" >التوكيلات والقضايا</a></li>-->
   <li><a class="grey" [routerLink]="['/case']" >القضايا </a></li>
   <li><a class="black">
@@ -150,10 +150,12 @@
                   </div>
                 </div>
               </div>
-              <br>
-              <button class="btn  px-4 ignorebtn"  [routerLink]="['/case']">تجاهل</button>
+              <div style="margin-left: 20%;">
 
-<button class="btn m-5 px-4 savebtn"  (click)="onSave()" [disabled]="exform.invalid" type="button">حفظ</button>
+                <button class="btn  px-4 ignorebtn"  [routerLink]="['/case']">تجاهل</button>
+
+                <button class="btn m-5 px-4 savebtn"  (click)="onSave()" [disabled]="exform.invalid" type="button">حفظ</button>
+              </div>
 
           </div>
 

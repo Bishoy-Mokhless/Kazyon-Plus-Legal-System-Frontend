@@ -5,6 +5,7 @@ import { Procuration } from '../procurartion';
 import { ProcurartonService } from '../procurarton.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { GlobalComponent } from '../global-component';
 @Component({
   selector: 'app-procuration1',
   templateUrl: './procuration1.component.html',
@@ -21,7 +22,7 @@ export class Procuration1Component implements OnInit {
   hasAttachament?:boolean;
 
   //downloadUrl = `http://adminkazyonplus.uksouth.cloudapp.azure.com/api/attachment/download/${1}?type=procurations`
-  downloadUrl = `https://legalbackend-production.up.railway.app/attachment/download/${1}?type=procurations`;
+  downloadUrl = GlobalComponent.appUrl+`/attachment/download/${1}?type=procurations`;
   constructor(private service: ProcurartonService, private _navigate: Router) { }
 
   ngOnInit(): void {

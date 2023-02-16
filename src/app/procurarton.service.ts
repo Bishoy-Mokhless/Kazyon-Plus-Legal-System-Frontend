@@ -4,19 +4,16 @@ import { Observable } from 'rxjs';
 import { Procuration } from 'src/app/procurartion';
 import { Case } from './case';
 import { Session } from './session';
+import { GlobalComponent } from './global-component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProcurartonService {
-  //private base1Url="http://adminkazyonplus.uksouth.cloudapp.azure.com/api/";
-  //private baseUrl = "http://adminkazyonplus.uksouth.cloudapp.azure.com/api/procuration";
-  private baseUrl = "https://legalbackend-production.up.railway.app/procuration";
-  private base1Url="https://legalbackend-production.up.railway.app/";
-  //private caseUrl= "http://adminkazyonplus.uksouth.cloudapp.azure.com/api/case";
-  private caseUrl= "https://legalbackend-production.up.railway.app/case";
-  //private sessionUrl= "http://adminkazyonplus.uksouth.cloudapp.azure.com/api/session";
-  private sessionUrl= "https://legalbackend-production.up.railway.app/session";
+  private baseUrl = GlobalComponent.appUrl+"/procuration";
+  private base1Url=GlobalComponent.appUrl;
+  private caseUrl= GlobalComponent.appUrl+"/case";
+  private sessionUrl= GlobalComponent.appUrl+"/session";
   token = JSON.parse(localStorage.getItem('token')!);
   temp = this.token['Token'];
   tempToken = JSON.stringify(this.temp);
@@ -56,7 +53,7 @@ export class ProcurartonService {
   updateProcurartion(proc:Procuration): Observable<any>{
     const headers = { 'content-type': 'application/json','Authorization':this.finalToken}
     const body=JSON.stringify(proc);
-    return this.http.put(this.baseUrl + '/update/'+proc.id, body,{'headers':headers})
+    return this.http.post(this.baseUrl + '/update/'+proc.id,proc,{'headers':headers})
   }
   getCases(): Observable<Case[]>{
     return this.http.get<Case[]>(`${this.caseUrl}`,{
@@ -101,14 +98,14 @@ export class ProcurartonService {
     });
   }
   uploadPdfProc(type:string,files: any[], id?: number | null){
-    var fd = new FormData();
+    let fd = new FormData();
     console.log("hi");
-    for (let i=0;i<files.length;i++)
+    for (const element of files)
     {
-      fd.append("files", files[i], files[i].name);
+      fd.append("files", element, element.name);
     }
     fd.append("type",type);
-    return this.http.post(this.base1Url + "attachment/upload?" + "id="+  <Number>  <unknown>id, fd, {
+    return this.http.post(this.base1Url + "/attachment/upload?" + "id="+  <number>  <unknown>id, fd, {
       headers: {
         "mimeType" : "multipart/form-data",
         'Authorization':this.finalToken,
@@ -116,14 +113,14 @@ export class ProcurartonService {
     });
   }
   appendPdfProc(type:string,files: any[], id?: number | null){
-    var fd = new FormData();
+    let fd = new FormData();
     console.log("hi");
-    for (let i=0;i<files.length;i++)
+    for (const element of files)
     {
-      fd.append("files", files[i], files[i].name);
+      fd.append("files", element, element.name);
     }
     fd.append("type",type);
-    return this.http.post(this.base1Url + "attachment/append?" + "id="+  <Number>  <unknown>id, fd, {
+    return this.http.post(this.base1Url + "/attachment/append?" + "id="+  <number>  <unknown>id, fd, {
       headers: {
         "mimeType" : "multipart/form-data",
         'Authorization':this.finalToken,

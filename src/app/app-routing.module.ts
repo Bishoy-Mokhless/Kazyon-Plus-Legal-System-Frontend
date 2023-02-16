@@ -20,7 +20,7 @@ const routes: Routes = [
   },
   {path:'error', component:ErrorPageComponent},
   {path:'home', component:IndexComponent},
-  {path:'lawsuit', component:LawsuitComponent},
+  {path:'legal', component:LawsuitComponent},
   {path:'case',component:Case1Component},
   {path:'procuration',component:ProcurationComponent },
   {path:'procuration1',component:Procuration1Component },

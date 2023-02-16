@@ -46,6 +46,10 @@ export class IndexComponent implements OnInit {
       this.unique_province = [...new Set(this.apidata.map(item => item.province))];
       this.unique_status = [...new Set(this.apidata.map(item => item.status))];
 
+    },(error) => {
+
+      this._router.navigate(['error']);
+
     });
 
 

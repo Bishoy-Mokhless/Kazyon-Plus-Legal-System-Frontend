@@ -1,7 +1,6 @@
 <ul class="breadcrumb">
   <i class="fa fa-home "  ></i>
-  <li><a class="grey" href="#">الرئيسيه</a></li>
-  <li><a class="grey" href="#" >التوكيلات والقضايا </a></li>
+  <li><a class="grey" href="legal">الرئيسيه</a></li>
   <li><a class="grey" [routerLink]="['/procuration']"  >التوكيلات  </a></li>
   <li><a class="black"  >   اضافة توكيل جديد   </a></li>
 
@@ -54,7 +53,7 @@
 
 </style>
 <div class="container-fluid box mt-4 box" dir="rtl">
-  
+
   <br>
   <br>
   <div class="in text-center">
@@ -65,9 +64,9 @@
             <input [(ngModel)]="procuration.client_name"  required="required" formControlName="client_name" type="text" class="form-control input-lg" (keypress)="letterOnly($event)" maxlength="150" >
             <label class="required-asterisk">* </label>
             <span> اسم الموكل</span>
-        
 
-        
+
+
       </div> -->
       <div class="grid2">
         <div class="grid_item">
@@ -81,7 +80,7 @@
           <span class="required-asterisk">*</span>
         </label>
         <input id="date"  [(ngModel)]="procuration.year"  [ngModel] ="procuration.year | date:'yyyy-MM-dd'" formControlName="year" type='text' class="form-controll"  onfocus="(this.type='date')" (keydown)="false">
-       
+
        </div>
       <div class="grid_item">
         <label class="label"> رقم التوكيل
@@ -137,6 +136,9 @@
 </div>
 <br>
 </div>
-<button class="btn m px-4 ignorebtn"  [routerLink]="['/procuration']">تجاهل</button>
+<div style="margin-left: 1.7%;">
+  <button class="btn m px-4 ignorebtn"  [routerLink]="['/procuration']">تجاهل</button>
 
 <button class="btn m-2 px-4 savebtn" (click)="onSave()"  [disabled]="exform.invalid" type="button" >حفظ</button>
+
+</div>

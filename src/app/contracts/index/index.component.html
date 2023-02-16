@@ -1,3 +1,9 @@
+<ul class="breadcrumb">
+  <i class="fa fa-home "  ></i>
+  <li><a class="grey" href="legal">الرئيسيه</a></li>
+  <li><a class="black"  >العقود  </a></li>
+
+</ul>
 <div class="container-fluid content mt-3" dir="rtl">
     <h3 class="me-4 ">العقود</h3>
     <div class="row justify-content-around align-items-center mt-4 summary">
@@ -39,7 +45,7 @@
                     </button>
                     <mat-select (clickOutside)="branch.close()" #branch (selectionChange)="changeFilter($event, 'branch')" placeholder="الاسم" style="width: auto;" disableOptionCentering panelClass="myPanelClass">
                       <ng-container *ngFor="let row of unique_branch_name">
-                      <mat-option *ngIf='row != "" && row != null'  [value]="row">
+                      <mat-option style="background-color: white;" *ngIf='row != "" && row != null'  [value]="row">
 
                             {{ row }}
 
@@ -60,7 +66,7 @@
                   <i class="fa-solid fa-xmark ms-2"></i>
                 </button>
                 <mat-select (clickOutside)="governorate.close()" #governorate (selectionChange)="changeFilter($event, 'governorate')" placeholder="المحافظة" style="width: auto;" disableOptionCentering panelClass="myPanelClass">
-                    <mat-option *ngFor="let row of unique_governorate"  [value]="row">
+                    <mat-option style="background-color: white;" *ngFor="let row of unique_governorate"  [value]="row">
                         {{ row }}
                     </mat-option>
                 </mat-select>
@@ -76,7 +82,7 @@
                 <i class="fa-solid fa-xmark ms-2"></i>
               </button>
                 <mat-select (clickOutside)="province.close()" #province (selectionChange)="changeFilter($event, 'province')" placeholder="الاقليم" style="width: auto;" disableOptionCentering panelClass="myPanelClass">
-                    <mat-option  *ngFor="let row of unique_province" [value]="row">
+                    <mat-option style="background-color: white;" *ngFor="let row of unique_province" [value]="row">
                         {{ row }}
                     </mat-option>
                 </mat-select>
@@ -119,7 +125,7 @@
                 <i class="fa-solid fa-xmark ms-2"></i>
               </button>
                 <mat-select (clickOutside)="status.close()" #status (selectionChange)="changeFilter($event, 'status')" placeholder="الحالة" style="width: auto;" disableOptionCentering panelClass="myPanelClass">
-                  <mat-option  *ngFor="let row of unique_status" [value]="row">
+                  <mat-option style="background-color: white;" *ngFor="let row of unique_status" [value]="row">
                       {{ row }}
                  </mat-option>
                 </mat-select>

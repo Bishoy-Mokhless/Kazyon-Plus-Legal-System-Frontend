@@ -3,6 +3,8 @@ import { Injectable} from '@angular/core';
 import { Contract } from './contract';
 import { ContractSummary } from './contract-summary';
 import { Observable, ObservedValueOf} from 'rxjs';
+import { GlobalComponent } from '../global-component';
+
 
 
 @Injectable({
@@ -14,7 +16,7 @@ export class ContractsApiService {
 
   constructor(private _HttpClient:HttpClient) { }
 
-  api = 'https://legalbackend-production.up.railway.app/contract/'
+  api = GlobalComponent.appUrl+'/contract/'
   //api = 'http://localhost:8080/contract/'
   token = JSON.parse(localStorage.getItem('token')!);
   temp = this.token['Token'];
@@ -51,7 +53,7 @@ export class ContractsApiService {
   }
 
    downloadContractAttachment (store_code?:Number | undefined): any {
-     return this._HttpClient.get("https://legalbackend-production.up.railway.app/" + `attachment/download/${store_code}.zip`, {
+     return this._HttpClient.get(GlobalComponent.appUrl + `/attachment/download/${store_code}.zip`, {
       headers: {
         'Authorization':this.finalToken,
       },
@@ -66,7 +68,7 @@ export class ContractsApiService {
     files.forEach(file => {
       fd.append("files", file, file.name);
     })
-    return this._HttpClient.post<Contract[]>("https://legalbackend-production.up.railway.app/" + "attachment/upload?" + "id="+  <Number>  <unknown>id, fd, {
+    return this._HttpClient.post<Contract[]>(GlobalComponent.appUrl + "/attachment/upload?" + "id="+  <Number>  <unknown>id, fd, {
       headers: {
         "mimeType" : "multipart/form-data",
         'Authorization':this.finalToken

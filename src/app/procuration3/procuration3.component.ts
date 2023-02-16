@@ -6,6 +6,7 @@ import { ProcurartonService } from '../procurarton.service';
 import { Procuration } from '../procurartion';
 import Swal from 'sweetalert2';
 import { DatePipe } from '@angular/common';
+import { GlobalComponent } from '../global-component';
 @Component({
   selector: 'app-procuration3',
   templateUrl: './procuration3.component.html',
@@ -24,8 +25,7 @@ export class Procuration3Component implements OnInit {
   documentList: any[] = [];
   hasAttachament?:boolean;
 
-  //downloadUrl = `http://adminkazyonplus.uksouth.cloudapp.azure.com/api/attachment/download/${this.id}?type=procurations`
-  downloadUrl = `https://legalbackend-production.up.railway.app/attachment/download/${this.id}?type=procurations`
+  downloadUrl = GlobalComponent.appUrl+`/attachment/download/${this.id}?type=procurations`
 
   constructor(private service: ProcurartonService, private _router: ActivatedRoute, private _navigate: Router) { }
 

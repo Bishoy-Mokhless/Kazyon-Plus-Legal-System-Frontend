@@ -1,7 +1,6 @@
 <ul class="breadcrumb">
   <i class="fa fa-home "  ></i>
-  <li><a class="grey" href="#">الرئيسيه</a></li>
-  <li><a class="grey" href="#" >التوكيلات والقضايا </a></li>
+  <li><a class="grey" href="legal">الرئيسيه</a></li>
   <li><a class="grey" [routerLink]="['/procuration']"  >التوكيلات  </a></li>
   <li><a class="black"  >  #{{proc.id}}   </a></li>
 
@@ -124,8 +123,11 @@
     </div>
 </div>
 
-<button class="btn m px-4 ignorebtn" [routerLink]="['/procuration']">  تجاهل</button>
+<div style="margin-left: 1.7%;">
+  <button class="btn m px-4 ignorebtn" [routerLink]="['/procuration']">  تجاهل</button>
 
         <button (click)="onSave()" class="btn m-2 px-4 savebtn" [disabled]="exform.invalid">حفظ</button>
 
-        
+
+
+</div>

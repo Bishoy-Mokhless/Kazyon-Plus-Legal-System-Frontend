@@ -10,6 +10,7 @@ import {MatDatepicker} from "@angular/material/datepicker";
 import {MatInput} from "@angular/material/input";
 import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { GlobalComponent } from '../global-component';
 
 
 @Component({
@@ -35,7 +36,7 @@ export class Case3Component implements OnInit {
   files2: any[]=[];
   documentList: any[] = [];
   //downloadUrl = `http://adminkazyonplus.uksouth.cloudapp.azure.com/api/attachment/download/${this.id}?type=cases`
-  downloadUrl = `https://legalbackend-production.up.railway.app/attachment/download/${this.id}?type=cases`
+  downloadUrl = GlobalComponent.appUrl+`/attachment/download/${this.id}?type=cases`
   constructor( private service: ProcurartonService,private _router: ActivatedRoute, private _navigate: Router,private fb: FormBuilder) {
 
   }

@@ -163,18 +163,18 @@
       <table mat-table [dataSource]="sessions" #table  class="mat-elevation-z8  text-center" dir="rtl">
 
         <ng-container matColumnDef="تاريخ الجلسة الحاليه ">
-          <th mat-header-cell *matHeaderCellDef class="text-center">تاريخ الجلسة الحاليه </th>
-          <td mat-cell *matCellDef="let element">{{element.startingDate | date:"yyyy//MM/dd"}}</td>
+          <th mat-header-cell *matHeaderCellDef class="text-center" style="color: black;">تاريخ الجلسة الحاليه </th>
+          <td mat-cell *matCellDef="let element" class="text-center">{{element.startingDate | date:"yyyy//MM/dd"}}</td>
         </ng-container>
 
         <ng-container matColumnDef="قرار الجلسة الحاليه ">
-          <th mat-header-cell *matHeaderCellDef class="text-center">قرار الجلسة الحاليه </th>
-          <td mat-cell *matCellDef="let element"> {{element.decisionStatus}} </td>
+          <th mat-header-cell *matHeaderCellDef class="text-center" style="color: black;">قرار الجلسة الحاليه </th>
+          <td mat-cell *matCellDef="let element"  class="text-center"> {{element.decisionStatus}} </td>
         </ng-container>
 
         <ng-container matColumnDef="تاريخ الجلسة القادمه" >
-          <th mat-header-cell *matHeaderCellDef class="text-center">تاريخ الجلسة القادمه</th>
-          <td mat-cell *matCellDef="let element"> {{element.endingDate | date:"yyyy//MM/dd"}} </td>
+          <th mat-header-cell *matHeaderCellDef class="text-center" style="color: black;">تاريخ الجلسة القادمه</th>
+          <td mat-cell *matCellDef="let element"  class="text-center"> {{element.endingDate | date:"yyyy//MM/dd"}} </td>
         </ng-container>
 
         <tr mat-header-row  *matHeaderRowDef="displayedColumns"></tr>
@@ -186,7 +186,10 @@
 
   </div>
 </div>
-<br>
 
-<button (click)="onSave()" class="btn m-5 px-4 savebtn" [disabled]="exform.invalid" [hidden]="!caseFlag">حفظ</button>
-<button class="btn m-5 px-4 ignorebtn"  [routerLink]="['/case']" [hidden]="!caseFlag">  تجاهل</button>
+<div style="    margin-left: -54.1%;
+margin-top: 1%;">
+
+<button (click)="onSave()" class="btn m px-4 savebtn" [disabled]="exform.invalid" [hidden]="!caseFlag">حفظ</button>
+<button class="btn m-2 px-4 ignorebtn"  [routerLink]="['/case']" [hidden]="!caseFlag">  تجاهل</button>
+</div>

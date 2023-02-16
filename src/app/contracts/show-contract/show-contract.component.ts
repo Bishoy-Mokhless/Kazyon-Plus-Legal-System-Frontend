@@ -8,6 +8,7 @@ import { ContractConstants } from '../contract-constants';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { GlobalComponent } from 'src/app/global-component';
 
 @Component({
   selector: 'app-show-contract',
@@ -46,7 +47,7 @@ export class ShowContractComponent implements OnInit {
 
   constants = ContractConstants;
 
-  download_url = "https://legalbackend-production.up.railway.app/attachment/download/1";
+  download_url = GlobalComponent.appUrl+"/attachment/download/1";
   store_codes?: any[];
   errorStoreCodeFlag = false;
   previous_store_code?: Number;
@@ -158,7 +159,7 @@ export class ShowContractComponent implements OnInit {
       this.currentContract = data
       this.has_previous_attachments = this.currentContract.has_attachment;
         //this.download_url = `http://adminkazyonplus.uksouth.cloudapp.azure.com/api/contract/attachment/download/${this.routerParams.snapshot.params?.['id']}`
-        this.download_url=`https://legalbackend-production.up.railway.app/attachment/download/${this.routerParams.snapshot.params?.['id']}`
+        this.download_url=GlobalComponent.appUrl+`/attachment/download/${this.routerParams.snapshot.params?.['id']}`
 
       if (data.status == "ساري") {
         this.className = "activeContract";

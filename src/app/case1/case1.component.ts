@@ -23,6 +23,10 @@ export class Case1Component implements OnInit {
       console.log(data);
       this.cases = data;
       this.cases.sort((a, b) => (a.idCase > b.idCase  ? 1 : -1));
+    },(error) => {
+
+      this._router.navigate(['error']);
+
     });
 
   }
@@ -32,10 +36,14 @@ export class Case1Component implements OnInit {
       .subscribe(data => {
         console.log(data)
         this.cases=data;
+      },(error) => {
+
+        this._router.navigate(['error']);
+
       })  }
       details(id:number){
         let route = 'case3/'+id;
       this._router.navigate([route]);
       }
- 
+
 }

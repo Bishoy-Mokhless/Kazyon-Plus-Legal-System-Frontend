@@ -18,7 +18,7 @@
 #main-text {
   z-index: 10;
   position: absolute;
-  top: 50%;
+  top: 36%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -32,7 +32,7 @@
 }
 
 .orange {
-  z-index: 11;
+  z-index: -1;
   position: absolute;
   top: 40%;
   left: 70%;
@@ -43,9 +43,12 @@ h1 {
   color: white;
   font-weight: 900;
   position: absolute;
+  align-items: center;
+  text-align: center;
+  z-index: 100;
   transform: translate(-50%, -50%);
-  font-size: 50px;
-  top: 72%;
+  font-size: 40px;
+  top: 65%;
   left: 50%;
 }
 
@@ -55,7 +58,7 @@ h1 {
   position: absolute;
   transform: translate(-50%, -50%);
   font-size: 20px;
-  top: 80%;
+  top: 77%;
   left: 50%;
 }
 
