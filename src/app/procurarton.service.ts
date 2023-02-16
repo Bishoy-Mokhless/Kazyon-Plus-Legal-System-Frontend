@@ -80,7 +80,7 @@ export class ProcurartonService {
     const body=JSON.stringify(cases);
     console.log("this");
     console.log(cases.idCase);
-    return this.http.put(this.caseUrl + '/'+cases.idCase, body,{'headers':headers})
+    return this.http.post(this.caseUrl + '/'+cases.idCase, cases,{'headers':headers})
   }
   getSessionByCaseID(ID:number): Observable<Session[]>{
     console.log("sss");
