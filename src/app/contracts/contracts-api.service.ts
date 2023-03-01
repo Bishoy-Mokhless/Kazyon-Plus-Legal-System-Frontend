@@ -52,8 +52,9 @@ export class ContractsApiService {
     });
   }
 
-   downloadContractAttachment (store_code?:Number | undefined): any {
-     return this._HttpClient.get(GlobalComponent.appUrl + `/attachment/download/${store_code}.zip`, {
+   downloadContractAttachment (id:string): any {
+
+    return this._HttpClient.get(this.api +"downloadFile/"+id, {
       headers: {
         'Authorization':this.finalToken,
       },
@@ -62,25 +63,25 @@ export class ContractsApiService {
     );
   }
 
-  addContractAttachments(files: any[], id?: string | null) {
-    var fd = new FormData();
-
-    files.forEach(file => {
-      fd.append("files", file, file.name);
-    })
-    return this._HttpClient.post<Contract[]>(GlobalComponent.appUrl + "/attachment/upload?" + "id="+  <Number>  <unknown>id, fd, {
+  addContractAttachments(files: any,id:string) {
+    const formData: FormData = new FormData();
+    formData.append("files",files)
+    return this._HttpClient.post<any>(this.api+ "addFile/"+id ,formData,{
       headers: {
+        "Content-Type" : "multipart/form-data",
         "mimeType" : "multipart/form-data",
-        'Authorization':this.finalToken
+        'Authorization':this.finalToken,
+        reportProgress: 'true',
       }
     });
   }
 
 
   appendContractAttachments(files: any[], id?: string | null) {
-    var fd = new FormData();
+    const fd: FormData = new FormData();
 
-    files.forEach(file => {
+
+     files.forEach(file => {
       fd.append("files", file, file.name);
     })
     return this._HttpClient.post<Contract[]>(this.api + "attachment/append?" + "id="+  <Number>  <unknown>id, fd, {

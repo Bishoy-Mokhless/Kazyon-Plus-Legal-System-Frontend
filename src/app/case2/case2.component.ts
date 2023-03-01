@@ -21,7 +21,12 @@ export class Case2Component implements OnInit {
   files: any[]=[];
   files2: any[]=[];
   documentList: any[] = [];
-  
+  myForm = new FormGroup({
+    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    file: new FormControl('', [Validators.required]),
+    fileSource: new FormControl('', [Validators.required])
+  });
+
   constructor(private service: ProcurartonService, private _build:FormBuilder, private _navigate: Router) { }
 
   ngOnInit(): void {
@@ -35,17 +40,32 @@ export class Case2Component implements OnInit {
       'filenumber':new FormControl(null),
       'clientstat':new FormControl(null),
       'againststat':new FormControl(null),
+
+
     });
+
+
   }
   onSave(){
     this.addCase();
-    
-    
+
+
   }
   onChange(event: any) {
     this.files = event.target.files;
     this.documentList = event.target.files;
    }
+
+
+  onFileChange(event:any) {
+
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.myForm.patchValue({
+        fileSource: file
+      });
+    }
+  }
   remove(index:number){
    this.files2=[];
    for (let i = 0; i < this.files.length; i++) {
@@ -73,13 +93,18 @@ export class Case2Component implements OnInit {
 
             if (suc.hasAttachment==false)
             {
-              this.service.uploadPdfProc("cases",this.files,suc.idCase).subscribe(data => {
+
+              console.log(this.files[0].name)
+
+              const formData = new FormData();
+              formData.append('file', this.myForm.get('fileSource')!.value!);
+              this.service.uploadPdfCase(formData,suc.idCase).subscribe(data => {
                 console.log("thissss",data);
               }) ;
             }
             else{
-              this.service.appendPdfProc("cases",this.files,suc.idCase).subscribe(data => {
-                console.log(data);
+              this.service.uploadPdfCase(this.files[0],suc.idCase).subscribe(data => {
+                console.log("thissss",data);
               }) ;
             }
           }

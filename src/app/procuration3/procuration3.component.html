@@ -101,7 +101,7 @@
 </label>
  <input id="file-upload" type="file"  accept="application/pdf" (change)="onChange($event)" multiple>
 
- <button [hidden]="!this.proc.hasAttachment" class="btn m-5 px-4 savebtn"> <a [href]="downloadUrl"> تحميل الملفات</a></button>
+ <button [hidden]="!this.proc.hasAttachment" class="btn m-5 px-4 savebtn" > <a download="FileName" [href]="downloadUrl"> تحميل الملفات</a></button>
  <div class="grid">
  <div *ngFor="let document of documentList; let i = index">
 
@@ -126,8 +126,12 @@
 <div style="margin-left: 1.7%;">
   <button class="btn m px-4 ignorebtn" [routerLink]="['/procuration']">  تجاهل</button>
 
-        <button (click)="onSave()" class="btn m-2 px-4 savebtn" [disabled]="exform.invalid">حفظ</button>
+        <button (click)="onSave()" class="btn m-2 px-4 savebtn" [disabled]="exform.invalid" enctype="multipart/form-data">حفظ</button>
 
 
 
 </div>
+<input type="file" class="file-upload" onchange="console.log(event.target.files)">
+
+
+//input file

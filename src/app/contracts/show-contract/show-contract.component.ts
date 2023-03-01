@@ -170,7 +170,7 @@ export class ShowContractComponent implements OnInit {
       }
     },
       (error) => {
-        this._routerLink.navigate(['**'])
+        this._routerLink.navigate([''])
       }
     )
    }

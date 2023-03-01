@@ -47,10 +47,10 @@
   }
 
   </style>
-  <div class="container-fluid box mt-4 box" dir="rtl">
+<div class="container-fluid box mt-4 box" dir="rtl">
     <br>
 
-    <div class="in text-center">
+<div class="in text-center">
 
       <form [formGroup]="exform" class="form">
         <div class="grid2">
@@ -134,7 +134,7 @@
                   <i class="fas fa-file-pdf"></i>
 
                 </label>
-                <input id="file-upload" type="file"  accept="application/pdf" (change)="onChange($event)" multiple>
+                <input id="file-upload" type="file"  accept="application/pdf" (change)="onFileChange($event)" >
 
                <div class="grid">
                   <div *ngFor="let document of documentList; let i = index">
@@ -150,13 +150,17 @@
                   </div>
                 </div>
               </div>
-              <div style="margin-left: 20%;">
 
-                <button class="btn  px-4 ignorebtn"  [routerLink]="['/case']">تجاهل</button>
 
-                <button class="btn m-5 px-4 savebtn"  (click)="onSave()" [disabled]="exform.invalid" type="button">حفظ</button>
+
               </div>
+              <div style="    margin-left: 0%;
+              margin-top: 5%;
+              margin-bottom: 3%; margin-right: 2%;"
+              >
+                <button class="btn m px-4 ignorebtn"  [routerLink]="['/procuration']">تجاهل</button>
+
+              <button class="btn m-2 px-4 savebtn" (click)="onSave()"  [disabled]="exform.invalid" type="button" >حفظ</button>
+
 
           </div>
-
-              </div>

@@ -36,7 +36,10 @@ export class Case3Component implements OnInit {
   files2: any[]=[];
   documentList: any[] = [];
   //downloadUrl = `http://adminkazyonplus.uksouth.cloudapp.azure.com/api/attachment/download/${this.id}?type=cases`
-  downloadUrl = GlobalComponent.appUrl+`/attachment/download/${this.id}?type=cases`
+  username = JSON.parse(localStorage.getItem('username')!);
+  password = JSON.parse(localStorage.getItem('password')!)
+  //downloadUrl = GlobalComponent.appUrl+`/attachment/download/${this.id}?type=cases`
+  downloadUrl = "http://"+this.username+":"+this.password+"@localhost:8080/case/downloadFile/"+this.id
   constructor( private service: ProcurartonService,private _router: ActivatedRoute, private _navigate: Router,private fb: FormBuilder) {
 
   }
@@ -80,7 +83,7 @@ export class Case3Component implements OnInit {
 
         if (this.case.hasAttachment==false)
         {
-          this.service.uploadPdfProc("cases",this.files,this.case.idCase).subscribe(data => {
+          this.service.uploadPdfCase(this.files,this.case.idCase).subscribe(data => {
             console.log(data);
           }) ;
         }

@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
     const username=target.querySelector('#defaultLoginForUsername').value
     const password=target.querySelector('#defaultLoginFormPassword').value
     localStorage.setItem("username",JSON.stringify(username))
+    localStorage.setItem("password",JSON.stringify(password))
     this.auth.login(username,password).subscribe(
       data=>{
 

@@ -14,7 +14,7 @@ export class ErrorPageComponent implements OnInit {
   }
   logOut(){
     localStorage.removeItem("token");
-    this.router.navigate(['**']);
+    this.router.navigate([''])
   }
 
 }

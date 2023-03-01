@@ -6,6 +6,7 @@ import { ProcurartonService } from '../procurarton.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { GlobalComponent } from '../global-component';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-procuration1',
   templateUrl: './procuration1.component.html',
@@ -23,7 +24,7 @@ export class Procuration1Component implements OnInit {
 
   //downloadUrl = `http://adminkazyonplus.uksouth.cloudapp.azure.com/api/attachment/download/${1}?type=procurations`
   downloadUrl = GlobalComponent.appUrl+`/attachment/download/${1}?type=procurations`;
-  constructor(private service: ProcurartonService, private _navigate: Router) { }
+  constructor(private service: ProcurartonService, private _navigate: Router,private http: HttpClient) { }
 
   ngOnInit(): void {
     this.exform = new FormGroup({
@@ -49,7 +50,7 @@ export class Procuration1Component implements OnInit {
 
         if (suc.hasAttachment==false)
         {
-          this.service.uploadPdfProc("procurations",this.files,suc.id).subscribe(data => {
+          this.service.uploadPdfProc(this.files,suc.id).subscribe(data => {
             console.log(data);
           }) ;
         }
@@ -66,6 +67,7 @@ export class Procuration1Component implements OnInit {
         });
       })
   }
+
   onSave(){
     this.addProcurartion();
   }

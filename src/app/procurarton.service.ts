@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Procuration } from 'src/app/procurartion';
 import { Case } from './case';
@@ -19,7 +19,7 @@ export class ProcurartonService {
   tempToken = JSON.stringify(this.temp);
   finalToken= this.tempToken.substring(2,this.tempToken.length-2)
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient ) { }
 
   getProcurartion(): Observable<Procuration[]>{
     return this.http.get<Procuration[]>(this.baseUrl+"/getall",{
@@ -97,21 +97,51 @@ export class ProcurartonService {
       }
     });
   }
-  uploadPdfProc(type:string,files: any[], id?: number | null){
-    let fd = new FormData();
+  uploadPdfProc(files: any, id:any){
+     let fd = new FormData();
     console.log("hi");
-    for (const element of files)
+    fd.append('files',files)
+    console.log(JSON.stringify(fd));
+    //fd.append('id',id)
+   /*  let params = new HttpParams()
+    .set('files', files) */
+
+    /* for (const element of files)
     {
       fd.append("files", element, element.name);
-    }
-    fd.append("type",type);
-    return this.http.post(this.base1Url + "/attachment/upload?" + "id="+  <number>  <unknown>id, fd, {
+    } */
+    //fd.append("type",type);
+
+    return this.http.post(this.baseUrl+ "/addFile/"+id, fd, {
       headers: {
-        "mimeType" : "multipart/form-data",
+        'Content-Type': "multipart/form-data; boundary=<calculated when request is sent>",
         'Authorization':this.finalToken,
       }
     });
   }
+  uploadPdfCase(files: any, id:any){
+    let fd = new FormData();
+   console.log("hi");
+   fd.append('files',files)
+   console.log(JSON.stringify(fd));
+   //fd.append('id',id)
+  /*  let params = new HttpParams()
+   .set('files', files) */
+
+   /* for (const element of files)
+   {
+     fd.append("files", element, element.name);
+   } */
+   //fd.append("type",type);
+
+   return this.http.post(this.base1Url+ "/case/addFile/"+id, files, {
+     headers: {
+       'Content-Type': "multipart/form-data; boundary=<calculated when request is sent>",
+       'Authorization':this.finalToken,
+     }
+   });
+ }
+
   appendPdfProc(type:string,files: any[], id?: number | null){
     let fd = new FormData();
     console.log("hi");

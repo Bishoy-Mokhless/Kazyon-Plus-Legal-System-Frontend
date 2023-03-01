@@ -28,7 +28,7 @@ const routes: Routes = [
   {path:'case3/:id',component:Case3Component },
   {path:'procuration2/:id',component:Procuration3Component},
   {path:'session/:id',component:SessionComponent },
-  {path: '**',component:LoginComponent}
+  {path: '',component:LoginComponent}
 
 ]
 

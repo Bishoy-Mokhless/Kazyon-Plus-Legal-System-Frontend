@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router'
 import { ProcurartonService } from '../procurarton.service';
@@ -24,8 +24,15 @@ export class Procuration3Component implements OnInit {
   files2: any[]=[];
   documentList: any[] = [];
   hasAttachament?:boolean;
-
-  downloadUrl = GlobalComponent.appUrl+`/attachment/download/${this.id}?type=procurations`
+  token = JSON.parse(localStorage.getItem('token')!);
+  temp = this.token['Token'];
+  tempToken = JSON.stringify(this.temp);
+  finalToken= this.tempToken.substring(2,this.tempToken.length-2);
+  username = JSON.parse(localStorage.getItem('username')!);
+  password = JSON.parse(localStorage.getItem('password')!)
+  
+  //downloadUrl = GlobalComponent.appUrl+`/procuration/downloadFile/${this.id}`
+downloadUrl = "http://"+this.username+":"+this.password+"@localhost:8080/procuration/downloadFile/1"
 
   constructor(private service: ProcurartonService, private _router: ActivatedRoute, private _navigate: Router) { }
 
@@ -78,7 +85,7 @@ export class Procuration3Component implements OnInit {
 
         if (this.proc.hasAttachment==false)
         {
-          this.service.uploadPdfProc("procurations",this.files,this.proc.id).subscribe(data => {
+          this.service.uploadPdfProc(this.files,this.proc.id).subscribe(data => {
             console.log(data);
           }) ;
         }
