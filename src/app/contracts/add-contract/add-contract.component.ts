@@ -137,7 +137,7 @@ renewal_date:string | null = "";
         this.contract = <Contract> data;
 
         if (files.length != 0)
-          this._contractService.addContractAttachments(files, <string> <unknown> this.contract.id).subscribe(data => {
+          this._contractService.addContractAttachments(files[0], <string> <unknown> this.contract.id).subscribe(data => {
 
             this.toastr.success('تم الحفظ بنجاح', '', {
               timeOut: 2000,

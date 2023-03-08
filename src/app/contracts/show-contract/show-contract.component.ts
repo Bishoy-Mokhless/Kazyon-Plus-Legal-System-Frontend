@@ -47,7 +47,7 @@ export class ShowContractComponent implements OnInit {
 
   constants = ContractConstants;
 
-  download_url = GlobalComponent.appUrl+"/attachment/download/1";
+  //download_url = GlobalComponent.appUrl+"/attachment/download/1";
   store_codes?: any[];
   errorStoreCodeFlag = false;
   previous_store_code?: Number;
@@ -58,6 +58,10 @@ export class ShowContractComponent implements OnInit {
   receiving_date:string | null = "";
   opening_date:string | null = "";
   renewal_date:string | null = "";
+  username = JSON.parse(localStorage.getItem('username')!);
+  password = JSON.parse(localStorage.getItem('password')!)
+  //downloadUrl = GlobalComponent.appUrl+`/attachment/download/${this.id}?type=cases`
+  downloadUrl =GlobalComponent.appUrl+"/contract/downloadFile/"
 
   isCollapsed = {
     contractInfo: false,
@@ -126,7 +130,7 @@ export class ShowContractComponent implements OnInit {
 
     if(files.length != 0)
     if (!this.currentContract.has_attachment)
-      this._contractService.addContractAttachments(files, <string> this.routerParams.snapshot.params?.['id'] ).subscribe(data => {
+      this._contractService.addContractAttachments(files[0], <string> this.routerParams.snapshot.params?.['id'] ).subscribe(data => {
         this.currentContract.has_attachment = true;
         this.toastr.success('تم الحفظ بنجاح', '', {
           timeOut: 2000,
@@ -136,7 +140,7 @@ export class ShowContractComponent implements OnInit {
         }) ;
       })
     else
-    this._contractService.appendContractAttachments(files, <string> this.routerParams.snapshot.params?.['id']).subscribe(data => {
+    this._contractService.appendContractAttachments(files[0], <string> this.routerParams.snapshot.params?.['id']).subscribe(data => {
       this.currentContract.has_attachment = true;
       this.toastr.success('تم الحفظ بنجاح', '', {
         timeOut: 2000,
@@ -158,8 +162,9 @@ export class ShowContractComponent implements OnInit {
     this._contractService.getContractById(id).subscribe((data)=> {
       this.currentContract = data
       this.has_previous_attachments = this.currentContract.has_attachment;
+
         //this.download_url = `http://adminkazyonplus.uksouth.cloudapp.azure.com/api/contract/attachment/download/${this.routerParams.snapshot.params?.['id']}`
-        this.download_url=GlobalComponent.appUrl+`/attachment/download/${this.routerParams.snapshot.params?.['id']}`
+        this.downloadUrl=GlobalComponent.appUrl+"/contract/downloadFile/"+this.routerParams.snapshot.params?.['id']
 
       if (data.status == "ساري") {
         this.className = "activeContract";

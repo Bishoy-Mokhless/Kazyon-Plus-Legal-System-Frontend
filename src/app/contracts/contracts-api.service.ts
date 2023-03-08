@@ -54,11 +54,11 @@ export class ContractsApiService {
 
    downloadContractAttachment (id:string): any {
 
-    return this._HttpClient.get(this.api +"downloadFile/"+id, {
+    return this._HttpClient.get(this.api +"contract/downloadFile/"+id, {
       headers: {
         'Authorization':this.finalToken,
       },
-      responseType: 'blob'
+
     },
     );
   }
@@ -66,19 +66,27 @@ export class ContractsApiService {
   addContractAttachments(files: any,id:string) {
     const formData: FormData = new FormData();
     formData.append("files",files)
+    formData.set("files",files)
     return this._HttpClient.post<any>(this.api+ "addFile/"+id ,formData,{
       headers: {
-        "Content-Type" : "multipart/form-data",
-        "mimeType" : "multipart/form-data",
         'Authorization':this.finalToken,
-        reportProgress: 'true',
-      }
+            }
     });
   }
 
 
-  appendContractAttachments(files: any[], id?: string | null) {
-    const fd: FormData = new FormData();
+ /*  appendContractAttachments(files: any[], id?: string | null) { */
+ appendContractAttachments(files: any,id:string) {
+
+    const formData: FormData = new FormData();
+    formData.append("files",files)
+    formData.set("files",files)
+    return this._HttpClient.post<any>(this.api+ "addFile/"+id ,formData,{
+      headers: {
+        'Authorization':this.finalToken,
+            }
+    });
+    /* const fd: FormData = new FormData();
 
 
      files.forEach(file => {
@@ -89,8 +97,9 @@ export class ContractsApiService {
         "mimeType" : "multipart/form-data",
         'Authorization':this.finalToken
       }
-    });
+    }); */
   }
+  /*  */
 
   addContract(contract:Contract):Observable<Contract> {
 

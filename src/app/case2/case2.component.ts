@@ -21,11 +21,6 @@ export class Case2Component implements OnInit {
   files: any[]=[];
   files2: any[]=[];
   documentList: any[] = [];
-  myForm = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    file: new FormControl('', [Validators.required]),
-    fileSource: new FormControl('', [Validators.required])
-  });
 
   constructor(private service: ProcurartonService, private _build:FormBuilder, private _navigate: Router) { }
 
@@ -57,15 +52,7 @@ export class Case2Component implements OnInit {
    }
 
 
-  onFileChange(event:any) {
 
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.myForm.patchValue({
-        fileSource: file
-      });
-    }
-  }
   remove(index:number){
    this.files2=[];
    for (let i = 0; i < this.files.length; i++) {
@@ -81,9 +68,11 @@ export class Case2Component implements OnInit {
   addCase() {
     //let obj= <Case> Object.assign ({},this.exform);
     this.case.sessionRequests=[];
+    console.log("Hello 1");
     this.service.addCase(this.case)
       .subscribe(
         suc => {
+          console.log("Hello 2");
           Swal.fire({title:"تم الحفظ",color:'green',confirmButtonColor:'green'}).then(() => {
             this._navigate.navigate(['case']);
           });
@@ -93,16 +82,14 @@ export class Case2Component implements OnInit {
 
             if (suc.hasAttachment==false)
             {
-
+              console.log("Hello 1");
               console.log(this.files[0].name)
-
-              const formData = new FormData();
-              formData.append('file', this.myForm.get('fileSource')!.value!);
-              this.service.uploadPdfCase(formData,suc.idCase).subscribe(data => {
+              this.service.uploadPdfCase(this.files[0],suc.idCase).subscribe(data => {
                 console.log("thissss",data);
               }) ;
             }
             else{
+              console.log("Hello 1");
               this.service.uploadPdfCase(this.files[0],suc.idCase).subscribe(data => {
                 console.log("thissss",data);
               }) ;

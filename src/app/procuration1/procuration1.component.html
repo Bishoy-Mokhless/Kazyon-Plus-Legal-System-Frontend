@@ -1,7 +1,7 @@
 
 <ul class="breadcrumb">
   <i class="fa fa-home "  ></i>
-  <li><a class="grey" href="legal">الرئيسيه</a></li>
+  <li><a class="grey" [routerLink]="['/legal']">الرئيسيه</a></li>
   <li><a class="grey" [routerLink]="['/procuration']"  >التوكيلات  </a></li>
   <li><a class="black"  >   اضافة توكيل جديد   </a></li>
 
@@ -117,7 +117,7 @@
     <i class="fas fa-file-pdf"></i>
 
 </label>
- <input id="file-upload" type="file"  accept="application/pdf" (change)="onChange($event)" multiple  encType="multipart/form-data">
+ <input id="file-upload" type="file" (change)="onChange($event)">
 
  <div class="grid">
  <div *ngFor="let document of documentList; let i = index">

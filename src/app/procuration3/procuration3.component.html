@@ -1,6 +1,6 @@
 <ul class="breadcrumb">
   <i class="fa fa-home "  ></i>
-  <li><a class="grey" href="legal">الرئيسيه</a></li>
+  <li><a class="grey" [routerLink]="['/legal']">الرئيسيه</a></li>
   <li><a class="grey" [routerLink]="['/procuration']"  >التوكيلات  </a></li>
   <li><a class="black"  >  #{{proc.id}}   </a></li>
 
@@ -101,7 +101,7 @@
 </label>
  <input id="file-upload" type="file"  accept="application/pdf" (change)="onChange($event)" multiple>
 
- <button [hidden]="!this.proc.hasAttachment" class="btn m-5 px-4 savebtn" > <a download="FileName" [href]="downloadUrl"> تحميل الملفات</a></button>
+ <button [hidden]="!this.proc.hasAttachment" class="btn m-5 px-4 savebtn" > <a download="FileName" [href]="downloadUrl" download="a.pdf"> تحميل الملفات</a></button>
  <div class="grid">
  <div *ngFor="let document of documentList; let i = index">
 
@@ -133,5 +133,3 @@
 </div>
 <input type="file" class="file-upload" onchange="console.log(event.target.files)">
 
-
-//input file

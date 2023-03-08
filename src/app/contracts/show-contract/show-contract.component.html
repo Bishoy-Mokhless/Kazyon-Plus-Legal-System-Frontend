@@ -142,7 +142,7 @@
     <div [@smoothCollapse]="isCollapsed.attachments?'initial':'final'">
 
       <app-upload [disabled]="!editState" #upload></app-upload>
-      <button *ngIf="currentContract.has_attachment" class="download-btn"><a [href]="download_url">تحميل الملفات</a></button>
+      <button *ngIf="currentContract.has_attachment" class="download-btn"><a [href]="downloadUrl" download="contract.pdf">تحميل الملفات</a></button>
 
       <div *ngIf="!currentContract.has_attachment && !editState">
         <p id="paragraph" dir="rtl">* هذا العقد ليس لديه أية مرفقات</p>

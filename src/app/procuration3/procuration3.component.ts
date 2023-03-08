@@ -30,9 +30,9 @@ export class Procuration3Component implements OnInit {
   finalToken= this.tempToken.substring(2,this.tempToken.length-2);
   username = JSON.parse(localStorage.getItem('username')!);
   password = JSON.parse(localStorage.getItem('password')!)
-  
+
   //downloadUrl = GlobalComponent.appUrl+`/procuration/downloadFile/${this.id}`
-downloadUrl = "http://"+this.username+":"+this.password+"@localhost:8080/procuration/downloadFile/1"
+  downloadUrl = GlobalComponent.appUrl+"/procuration/downloadFile/"+this.id
 
   constructor(private service: ProcurartonService, private _router: ActivatedRoute, private _navigate: Router) { }
 
@@ -83,14 +83,17 @@ downloadUrl = "http://"+this.username+":"+this.password+"@localhost:8080/procura
       {
         console.log(this.proc.hasAttachment);
 
+
         if (this.proc.hasAttachment==false)
         {
-          this.service.uploadPdfProc(this.files,this.proc.id).subscribe(data => {
+          console.log("Hello 3");
+          this.service.uploadPdfProc(this.files[0],this.proc.id).subscribe(data => {
             console.log(data);
           }) ;
         }
         else{
-          this.service.appendPdfProc("procurations",this.files,this.proc.id).subscribe(data => {
+          console.log("Hello 4");
+          this.service.uploadPdfProc(this.files[0],this.proc.id).subscribe(data => {
             console.log(data);
           }) ;
         }

@@ -22,6 +22,7 @@ export class ProcurartonService {
   constructor(private http: HttpClient ) { }
 
   getProcurartion(): Observable<Procuration[]>{
+    //console.log(window.location.href)
     return this.http.get<Procuration[]>(this.baseUrl+"/getall",{
       headers: {
         'Authorization':this.finalToken,
@@ -98,10 +99,11 @@ export class ProcurartonService {
     });
   }
   uploadPdfProc(files: any, id:any){
-     let fd = new FormData();
+    let fd = new FormData();
     console.log("hi");
     fd.append('files',files)
     console.log(JSON.stringify(fd));
+    fd.set('files', files);
     //fd.append('id',id)
    /*  let params = new HttpParams()
     .set('files', files) */
@@ -114,16 +116,16 @@ export class ProcurartonService {
 
     return this.http.post(this.baseUrl+ "/addFile/"+id, fd, {
       headers: {
-        'Content-Type': "multipart/form-data; boundary=<calculated when request is sent>",
-        'Authorization':this.finalToken,
+        'Authorization': this.finalToken,
       }
-    });
+      });
   }
   uploadPdfCase(files: any, id:any){
     let fd = new FormData();
    console.log("hi");
    fd.append('files',files)
    console.log(JSON.stringify(fd));
+   fd.set('files', files);
    //fd.append('id',id)
   /*  let params = new HttpParams()
    .set('files', files) */
@@ -134,15 +136,26 @@ export class ProcurartonService {
    } */
    //fd.append("type",type);
 
-   return this.http.post(this.base1Url+ "/case/addFile/"+id, files, {
+   return this.http.post(this.base1Url+ "/case/addFile/"+id, fd, {
      headers: {
-       'Content-Type': "multipart/form-data; boundary=<calculated when request is sent>",
+
        'Authorization':this.finalToken,
      }
    });
  }
-
-  appendPdfProc(type:string,files: any[], id?: number | null){
+ appendPdfProc(files: any, id:any){
+  let fd = new FormData();
+ console.log("hi");
+ fd.set('files',files)
+ console.log(JSON.stringify(fd));
+ fd.set('files', files);
+ return this.http.post(this.base1Url+ "/case/addFile/"+id, files, {
+   headers: {
+     'Authorization':this.finalToken,
+   }
+ });
+}
+  /* appendPdfProc(type:string,files: any[], id?: number | null){
     let fd = new FormData();
     console.log("hi");
     for (const element of files)
@@ -156,7 +169,7 @@ export class ProcurartonService {
         'Authorization':this.finalToken,
       }
     });
-  }
+  } */
  addSession(id:Number,session:Session): Observable<any> {
     const headers = { 'content-type': 'application/json','Authorization':this.finalToken,}
     const body=JSON.stringify(session);

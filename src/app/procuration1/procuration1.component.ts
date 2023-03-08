@@ -37,25 +37,29 @@ export class Procuration1Component implements OnInit {
     }
 
   addProcurartion() {
+    console.log("Hello 1");
 
     this.service.addProcurartion(this.procuration)
-    .subscribe(
+        .subscribe(
       suc => {
+        console.log("Hello 2");
         Swal.fire({title:"تم الحفظ",color:'green',confirmButtonColor:'green'}).then(() => {
           this._navigate.navigate(['procuration']);
         });
         if (this.files.length>0)
-      {
+        {
         console.log(suc.hasAttachment);
 
         if (suc.hasAttachment==false)
         {
-          this.service.uploadPdfProc(this.files,suc.id).subscribe(data => {
+          console.log("Hello 3");
+          this.service.uploadPdfProc(this.files[0],suc.id).subscribe(data => {
             console.log(data);
           }) ;
         }
         else{
-          this.service.appendPdfProc("procurations",this.files,suc.id).subscribe(data => {
+          console.log("Hello 4");
+          this.service.uploadPdfProc(this.files[0],suc.id).subscribe(data => {
             console.log(data);
           }) ;
         }
@@ -72,6 +76,7 @@ export class Procuration1Component implements OnInit {
     this.addProcurartion();
   }
   onChange(event: any) {
+    console.log("On change 1");
     this.files = event.target.files;
     this.documentList = event.target.files;
    }

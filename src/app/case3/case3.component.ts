@@ -39,7 +39,7 @@ export class Case3Component implements OnInit {
   username = JSON.parse(localStorage.getItem('username')!);
   password = JSON.parse(localStorage.getItem('password')!)
   //downloadUrl = GlobalComponent.appUrl+`/attachment/download/${this.id}?type=cases`
-  downloadUrl = "http://"+this.username+":"+this.password+"@localhost:8080/case/downloadFile/"+this.id
+  downloadUrl = GlobalComponent.appUrl+"/case/downloadFile/"+this.id
   constructor( private service: ProcurartonService,private _router: ActivatedRoute, private _navigate: Router,private fb: FormBuilder) {
 
   }
@@ -69,6 +69,7 @@ export class Case3Component implements OnInit {
         Swal.fire({title:"تم الحفظ",color:'green',confirmButtonColor:'green'}).then(() => {
           this._navigate.navigate(['case']);
         });
+
       },
       err => {
         Swal.fire({title:"تعذر الحفظ",color:'red',confirmButtonColor:'red'}).then(() => {
@@ -76,23 +77,29 @@ export class Case3Component implements OnInit {
       })
   }
   onSave(){
+    console.log("saving")
     this.updateCase();
-    if (this.files.length>0)
+
+      if (this.files.length>0)
       {
         console.log(this.case.hasAttachment);
 
+
         if (this.case.hasAttachment==false)
         {
-          this.service.uploadPdfCase(this.files,this.case.idCase).subscribe(data => {
+          console.log("Hello 3");
+          this.service.uploadPdfCase(this.files[0],this.case.idCase).subscribe(data => {
             console.log(data);
           }) ;
         }
         else{
-          this.service.appendPdfProc("cases",this.files,this.case.idCase).subscribe(data => {
+          console.log("Hello 4");
+          this.service.uploadPdfCase(this.files[0],this.case.idCase).subscribe(data => {
             console.log(data);
           }) ;
         }
       }
+
 
   }
   getSessionByID(){

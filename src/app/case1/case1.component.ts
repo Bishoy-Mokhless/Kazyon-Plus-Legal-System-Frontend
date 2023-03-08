@@ -4,6 +4,7 @@ import { Case } from '../case';
 import { ProcurartonService } from '../procurarton.service';
 import { DatePipe } from '@angular/common';
 
+
 @Component({
   selector: 'app-case1',
   templateUrl: './case1.component.html',

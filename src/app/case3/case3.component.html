@@ -1,6 +1,6 @@
 <ul class="breadcrumb">
   <i class="fa fa-home" ></i>
-  <li><a class="grey" [routerLink]="['/lawsuit']" >الرئيسيه</a></li>
+  <li><a class="grey" [routerLink]="['/legal']">الرئيسيه</a></li>
   <!--<li><a class="grey" href="#" >التوكيلات والقضايا</a></li>-->
   <li><a class="grey"  [routerLink]="['/case']" >القضايا </a></li>
   <li><a class="black"  >#{{case.idCase}}  </a></li>
@@ -134,9 +134,9 @@
         <i class="fas fa-file-pdf"></i>
 
       </label>
-      <input id="file-upload" type="file"  accept="application/pdf" (change)="onChange($event)" >
+      <input id="file-upload" type="file" accept="application/pdf" (change)="onChange($event)" >
 
-      <button [hidden]="!this.case.hasAttachment" class="btn m-5 px-4 savebtn"> <a [href]="downloadUrl" download> تحميل الملفات</a></button>
+      <button [hidden]="!this.case.hasAttachment" class="btn m-5 px-4 savebtn"> <a [href]="downloadUrl" download="new"> تحميل الملفات</a></button>
       <div class="grid">
         <div *ngFor="let document of documentList; let i = index">
 
@@ -187,8 +187,8 @@
   </div>
 </div>
 
-<div >
+<div style="display: flex; flex-direction: row; justify-content: center; align-items: center;" >
 
-<button (click)="onSave()" class="btn m px-4 savebtn" [disabled]="exform.invalid" [hidden]="!caseFlag">حفظ</button>
+<button (click)="onSave()" class="btn m px-4 savebtn" [disabled]="exform.invalid" [hidden]="!caseFlag" enctype="multipart/form-data">حفظ</button>
 <button class="btn m-2 px-4 ignorebtn"  [routerLink]="['/case']" [hidden]="!caseFlag">  تجاهل</button>
 </div>
