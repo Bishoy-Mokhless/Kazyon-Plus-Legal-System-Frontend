@@ -136,7 +136,7 @@ export class ProcurartonService {
    } */
    //fd.append("type",type);
 
-   return this.http.post(this.base1Url+ "/case/addFile/"+id, fd, {
+   return this.http.post(this.base1Url+ "/case/addFile/"+id, files, {
      headers: {
 
        'Authorization':this.finalToken,
@@ -149,8 +149,9 @@ export class ProcurartonService {
  fd.set('files',files)
  console.log(JSON.stringify(fd));
  fd.set('files', files);
- return this.http.post(this.base1Url+ "/case/addFile/"+id, files, {
+ return this.http.post(this.base1Url+ "/case/addFile/"+id, fd, {
    headers: {
+
      'Authorization':this.finalToken,
    }
  });
